@@ -1,1 +1,3 @@
-# auth_app
+# Authentication
+
+Firebase – Login and Registration Authentication.
