@@ -1,0 +1,113 @@
+package com.me.bui.auth.auth.login;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.me.bui.auth.R;
+import com.me.bui.auth.auth.reset.ResetPasswordActivity;
+import com.me.bui.auth.auth.signup.SignupActivity;
+import com.me.bui.auth.base.BaseActivity;
+import com.me.bui.auth.main.MainActivity;
+
+public class LoginActivity extends BaseActivity implements ILoginView {
+
+    private EditText inputEmail, inputPassword;
+
+    private ProgressBar progressBar;
+    private Button btnSignup, btnLogin, btnReset;
+
+    LoginPresent mPresent;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mPresent = new LoginPresent();
+        mPresent.attachView(this);
+
+        mPresent.checkSession();
+
+        // set the view now
+        setContentView(R.layout.activity_login);
+
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        inputEmail = (EditText) findViewById(R.id.email);
+        inputPassword = (EditText) findViewById(R.id.password);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        btnSignup = (Button) findViewById(R.id.btn_signup);
+        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnReset = (Button) findViewById(R.id.btn_reset_password);
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(SignupActivity.class);
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ResetPasswordActivity.class);
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = inputEmail.getText().toString();
+                final String password = inputPassword.getText().toString();
+
+                mPresent.login(email, password);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresent.dettachView();
+        mPresent.destroy();
+        mPresent = null;
+    }
+
+    @Override
+    public Activity getActivityClass() {
+        return LoginActivity.this;
+    }
+
+    @Override
+    public void setInputPasswordError(CharSequence error) {
+        inputPassword.setError(error);
+    }
+
+    @Override
+    public void showLoading() {
+//        super.showLoading();
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+//        super.hideLoading();
+        progressBar.setVisibility(View.GONE);
+    }
+}

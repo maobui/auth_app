@@ -7,9 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.me.bui.auth.R;
-import com.me.bui.auth.auth.LoginActivity;
+import com.me.bui.auth.auth.login.LoginActivity;
 import com.me.bui.auth.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements IMainView {
