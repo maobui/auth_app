@@ -1,6 +1,7 @@
 package com.me.bui.auth.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,14 +10,30 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class BaseActivity extends AppCompatActivity implements IBaseView {
     @Override
+    public Context getContext() {
+        return this.getApplicationContext();
+    }
+
+    @Override
     public void startActivity(Class<? extends Activity> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
-    protected void startActivityAndFinish(Class<? extends Activity> clazz) {
+    @Override
+    public void startActivityAndFinish(Class<? extends Activity> clazz) {
         startActivity(clazz);
         finish();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 
 }
