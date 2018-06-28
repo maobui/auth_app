@@ -1,15 +1,10 @@
 package com.me.bui.auth.main;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.login.LoginActivity;
@@ -63,9 +58,6 @@ public class MainActivity extends BaseActivity implements IMainView {
     @BindView(R.id.newPassword)
     EditText newPassword;
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
     private MainPresent mPresent;
 
     @Override
@@ -96,9 +88,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
 
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+        hideLoading();
 
     }
 
@@ -193,18 +183,6 @@ public class MainActivity extends BaseActivity implements IMainView {
         mPresent.dettachView();
         mPresent.destroy();
         mPresent = null;
-    }
-
-    @Override
-    public void showLoading() {
-//        super.showLoading();
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoading() {
-//        super.hideLoading();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override

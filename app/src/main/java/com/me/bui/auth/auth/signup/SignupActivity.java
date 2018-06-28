@@ -1,15 +1,10 @@
 package com.me.bui.auth.auth.signup;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.reset.ResetPasswordActivity;
@@ -35,9 +30,6 @@ public class SignupActivity extends BaseActivity implements ISignupView {
 
     @BindView(R.id.btn_reset_password)
     Button btnResetPassword;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     private SignupPresent mPresent;
 
@@ -66,14 +58,14 @@ public class SignupActivity extends BaseActivity implements ISignupView {
     }
 
     @OnClick(R.id.btn_reset_password)
-    void onResetPassword(){
+    void onResetPassword() {
         startActivity(ResetPasswordActivity.class);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
+        hideLoading();
     }
 
     @Override
@@ -82,18 +74,6 @@ public class SignupActivity extends BaseActivity implements ISignupView {
         mPresent.dettachView();
         mPresent.destroy();
         mPresent = null;
-    }
-
-    @Override
-    public void showLoading() {
-//        super.showLoading();
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoading() {
-//        super.hideLoading();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.me.bui.auth.base;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.me.bui.auth.util.Utils;
 
 import butterknife.Unbinder;
 
@@ -17,6 +20,8 @@ import butterknife.Unbinder;
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     private Unbinder mUnbinder;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     public void setUp() {
@@ -37,12 +42,15 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     @Override
     public void showLoading() {
-
+        hideLoading();
+        mProgressDialog = Utils.showLoadingDialog(this);
     }
 
     @Override
     public void hideLoading() {
-
+        if(mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
     }
 
     private void showSnackbar(String message, int color) {

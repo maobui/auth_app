@@ -1,16 +1,9 @@
 package com.me.bui.auth.auth.login;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.reset.ResetPasswordActivity;
@@ -28,9 +21,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @BindView(R.id.password)
     EditText inputPassword;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     @BindView(R.id.btn_signup)
     Button btnSignup;
@@ -93,18 +83,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public void setInputPasswordError() {
         inputPassword.setError(getString(R.string.minimum_password));
-    }
-
-    @Override
-    public void showLoading() {
-//        super.showLoading();
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoading() {
-//        super.hideLoading();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
