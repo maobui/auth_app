@@ -44,4 +44,12 @@
     <string name="reset_pass_failed">Failed to send reset email!</string>
     <string name="delete_user_successful">Your profile is deleted:( Create a account now!</string>
     <string name="delete_user_failed">Failed to delete your account!</string>
+    <string name="realtime_database">Realtime database</string>
+    <string name="action_save">Save</string>
+    <string name="action_update">Update</string>
+    <string name="name">Name</string>
+    <string name="warn_user_data">User data is null!</string>
+    <string name="fail_read_user">Failed to read user</string>
+    <string name="fail_read_app_title">Failed to read app title value.</string>
+    <string name="msg_user_changed">User data is changed!</string>
 </resources>

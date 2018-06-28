@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.login.LoginActivity;
 import com.me.bui.auth.base.BaseActivity;
+import com.me.bui.auth.realdb.RealtimeDatabaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +58,9 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @BindView(R.id.newPassword)
     EditText newPassword;
+
+    @BindView(R.id.realtime_database_button)
+    Button btnRealtimeDatabase;
 
     private MainPresent mPresent;
 
@@ -147,6 +151,11 @@ public class MainActivity extends BaseActivity implements IMainView {
     @OnClick(R.id.remove_user_button)
     void onRemoveUserButtonClick() {
         mPresent.removeUser();
+    }
+
+    @OnClick(R.id.realtime_database_button)
+    void onRealtimeDatabaseClick() {
+        startActivity(RealtimeDatabaseActivity.class);
     }
 
     @OnClick(R.id.sign_out)
