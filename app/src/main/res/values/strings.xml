@@ -29,4 +29,9 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="prompt_password">Password</string>
+    <string name="enter_email">Enter email address!</string>
+    <string name="enter_password">Enter password!</string>
+    <string name="enter_email_id">Enter your registered email id</string>
+    <string name="sent_reset_password">We have sent you instructions to reset your password!</string>
+    <string name="fail_send_reset_password">Failed to send reset email!</string>
 </resources>

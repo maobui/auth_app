@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.me.bui.auth.R;
 import com.me.bui.auth.base.BasePresent;
 
 /**
@@ -24,7 +25,7 @@ public class ResetPasswordPresent extends BasePresent<IResetPasswordView> {
 
     public void reset(String email) {
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(mV.getContext(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+            mV.showWarningEmail();
             return;
         }
 
@@ -34,11 +35,10 @@ public class ResetPasswordPresent extends BasePresent<IResetPasswordView> {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(mV.getContext(), "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                            mV.showSuccessSent();
                         } else {
-                            Toast.makeText(mV.getContext(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                            mV.showErrorSendFail();
                         }
-
                         mV.hideLoading();
                     }
                 });

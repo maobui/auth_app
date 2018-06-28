@@ -36,4 +36,18 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     }
 
+    @Override
+    public void showWarning(String warning) {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
+    @Override
+    public void showSuccess(String success) {
+
+    }
 }

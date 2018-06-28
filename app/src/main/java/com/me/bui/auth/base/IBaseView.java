@@ -14,4 +14,7 @@ public interface IBaseView {
 
     void showLoading();
     void hideLoading();
+    void showWarning(String warning);
+    void showError(String error);
+    void showSuccess(String success);
 }

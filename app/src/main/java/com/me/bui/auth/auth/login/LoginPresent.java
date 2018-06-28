@@ -1,16 +1,12 @@
 package com.me.bui.auth.auth.login;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.me.bui.auth.R;
 import com.me.bui.auth.base.BasePresent;
 import com.me.bui.auth.main.MainActivity;
 
@@ -34,12 +30,12 @@ public class LoginPresent extends BasePresent<ILoginView> {
 
     public void login(String email, final String password) {
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(mV.getContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            mV.showWarningEmail();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(mV.getContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            mV.showWarningPassword();
             return;
         }
 
@@ -57,9 +53,9 @@ public class LoginPresent extends BasePresent<ILoginView> {
                         if (!task.isSuccessful()) {
                             // there was an error
                             if (password.length() < 6) {
-                                mV.setInputPasswordError(mV.getContext().getString(R.string.minimum_password));
+                                mV.setInputPasswordError();
                             } else {
-                                Toast.makeText(mV.getContext(), mV.getContext().getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                mV.showAuthFailed();
                             }
                         } else {
                             mV.startActivityAndFinish(MainActivity.class);
