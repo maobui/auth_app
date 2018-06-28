@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -48,7 +49,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     @Override
     public void hideLoading() {
-        if(mProgressDialog != null && mProgressDialog.isShowing()) {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.cancel();
         }
     }
@@ -61,19 +62,31 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         snackbar.show();
     }
 
-    @Override
-    public void showError(String error) {
+    private void showError(String error) {
         this.showSnackbar(error, Color.RED);
     }
 
     @Override
-    public void showWarning(String warning) {
+    public void showError(@StringRes int resId) {
+        showError(getString(resId));
+    }
+
+    private void showWarning(String warning) {
         this.showSnackbar(warning, Color.YELLOW);
     }
 
     @Override
-    public void showSuccess(String success) {
+    public void showWarning(@StringRes int resId) {
+        showWarning(getString(resId));
+    }
+
+    private void showSuccess(String success) {
         this.showSnackbar(success, Color.GREEN);
+    }
+
+    @Override
+    public void showSuccess(@StringRes int resId) {
+        showSuccess(getString(resId));
     }
 
     public void setUnbinder(Unbinder unbinder) {

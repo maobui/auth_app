@@ -87,16 +87,16 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void showWarningEmail() {
-        showWarning(getString(R.string.enter_email));
+        showWarning(R.string.enter_email);
     }
 
     @Override
     public void showWarningPassword() {
-        showWarning(getString(R.string.enter_password));
+        showWarning(R.string.enter_password);
     }
 
     @Override
     public void showAuthFailed() {
-        showError(getString(R.string.auth_failed));
+        showError(R.string.auth_failed);
     }
 }

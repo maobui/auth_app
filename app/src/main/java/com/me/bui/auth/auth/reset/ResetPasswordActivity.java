@@ -57,16 +57,16 @@ public class ResetPasswordActivity extends BaseActivity implements IResetPasswor
 
     @Override
     public void showWarningEmail() {
-        showWarning(getString(R.string.enter_email_id));
+        showWarning(R.string.enter_email_id);
     }
 
     @Override
     public void showSuccessSent() {
-        showSuccess(getString(R.string.sent_reset_password));
+        showSuccess(R.string.sent_reset_password);
     }
 
     @Override
     public void showErrorSendFail() {
-        showError(getString(R.string.fail_send_reset_password));
+        showError(R.string.fail_send_reset_password);
     }
 }

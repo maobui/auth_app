@@ -83,27 +83,27 @@ public class SignupActivity extends BaseActivity implements ISignupView {
 
     @Override
     public void showWarningEmail() {
-        showWarning(getString(R.string.enter_email));
+        showWarning(R.string.enter_email);
     }
 
     @Override
     public void showWarningPassword() {
-        showWarning(getString(R.string.enter_password));
+        showWarning(R.string.enter_password);
     }
 
     @Override
     public void showWarningPasswordMin() {
-        showWarning(getString(R.string.minimum_password));
+        showWarning(R.string.minimum_password);
 
     }
 
     @Override
     public void showErrorCreateFailed() {
-        showError(getString(R.string.auth_failed_reason));
+        showError(R.string.auth_failed_reason);
     }
 
     @Override
     public void showSuccessCreated() {
-        showSuccess(getString(R.string.created_user_successful));
+        showSuccess(R.string.created_user_successful);
     }
 }

@@ -187,42 +187,42 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void showSuccessEmailUpdated() {
-        showSuccess(getString(R.string.email_updated));
+        showSuccess(R.string.email_updated);
     }
 
     @Override
     public void showErrorEmailUpdate() {
-        showError(getString(R.string.email_update_failed));
+        showError(R.string.email_update_failed);
     }
 
     @Override
     public void showSuccessPasswordUpdated() {
-        showSuccess(getString(R.string.password_updated));
+        showSuccess(R.string.password_updated);
     }
 
     @Override
     public void showErrorPasswordUpdate() {
-        showError(getString(R.string.password_update_failed));
+        showError(R.string.password_update_failed);
     }
 
     @Override
     public void showSuccessPasswordSent() {
-        showSuccess(getString(R.string.reset_pass_sent));
+        showSuccess(R.string.reset_pass_sent);
     }
 
     @Override
     public void showErrorPasswordSend() {
-        showError(getString(R.string.reset_pass_failed));
+        showError(R.string.reset_pass_failed);
     }
 
     @Override
     public void showSuccessDeleteUser() {
-        showSuccess(getString(R.string.delete_user_successful));
+        showSuccess(R.string.delete_user_successful);
     }
 
     @Override
     public void showErrorDeleteUserFail() {
-        showError(getString(R.string.delete_user_failed));
+        showError(R.string.delete_user_failed);
     }
 
     @Override
