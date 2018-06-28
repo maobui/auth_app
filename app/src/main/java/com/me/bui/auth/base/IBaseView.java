@@ -8,7 +8,6 @@ import android.content.Context;
  */
 public interface IBaseView {
 
-    Context getContext();
     void startActivity (Class<? extends Activity> clazz);
     void startActivityAndFinish(Class<? extends Activity> clazz);
 

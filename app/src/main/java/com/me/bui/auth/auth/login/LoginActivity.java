@@ -107,24 +107,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         progressBar.setVisibility(View.GONE);
     }
 
-    private void showSnackbar(String error, int color) {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_LONG);
-        View sbView = snackbar.getView();
-        TextView tvLabel = sbView.findViewById(android.support.design.R.id.snackbar_text);
-        tvLabel.setTextColor(color);
-        snackbar.show();
-    }
-
-    @Override
-    public void showError(String error) {
-        this.showSnackbar(error, Color.RED);
-    }
-
-    @Override
-    public void showWarning(String warning) {
-        this.showSnackbar(warning, Color.YELLOW);
-    }
-
     @Override
     public void showWarningEmail() {
         showWarning(getString(R.string.enter_email));
