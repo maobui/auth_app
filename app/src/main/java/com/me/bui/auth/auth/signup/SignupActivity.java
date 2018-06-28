@@ -1,11 +1,15 @@
 package com.me.bui.auth.auth.signup;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.reset.ResetPasswordActivity;
@@ -18,6 +22,7 @@ public class SignupActivity extends BaseActivity implements ISignupView {
     private ProgressBar progressBar;
 
     private SignupPresent mPresent;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,7 @@ public class SignupActivity extends BaseActivity implements ISignupView {
         mPresent = new SignupPresent();
         mPresent.attachView(this);
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
         inputEmail = (EditText) findViewById(R.id.email);
@@ -85,9 +91,57 @@ public class SignupActivity extends BaseActivity implements ISignupView {
         progressBar.setVisibility(View.GONE);
     }
 
+    private void showSnackbar(String error, int color) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        TextView tvLabel = sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tvLabel.setTextColor(color);
+        snackbar.show();
+    }
+
+    @Override
+    public void showError(String error) {
+        this.showSnackbar(error, Color.RED);
+    }
+
+    @Override
+    public void showWarning(String warning) {
+        this.showSnackbar(warning, Color.YELLOW);
+    }
+
+    @Override
+    public void showSuccess(String success) {
+        this.showSnackbar(success, Color.GREEN);
+    }
 
     @Override
     public Activity getActivityClass() {
         return SignupActivity.this;
+    }
+
+    @Override
+    public void showWarningEmail() {
+        showWarning(getString(R.string.enter_email));
+    }
+
+    @Override
+    public void showWarningPassword() {
+        showWarning(getString(R.string.enter_password));
+    }
+
+    @Override
+    public void showWarningPasswordMin() {
+        showWarning(getString(R.string.minimum_password));
+
+    }
+
+    @Override
+    public void showErrorCreateFailed() {
+        showError(getString(R.string.auth_failed_reason));
+    }
+
+    @Override
+    public void showSuccessCreated() {
+        showSuccess(getString(R.string.created_user_successful));
     }
 }

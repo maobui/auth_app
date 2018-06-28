@@ -13,4 +13,13 @@ public interface IMainView extends IBaseView{
     void setPasswordError(CharSequence error);
     String getNewEmail();
     void setNewEmailError(CharSequence error);
+
+    void showSuccessEmailUpdated();
+    void showErrorEmailUpdate();
+    void showSuccessPasswordUpdated();
+    void showErrorPasswordUpdate();
+    void showSuccessPasswordSent();
+    void showErrorPasswordSend();
+    void showSuccessDeleteUser();
+    void showErrorDeleteUserFail();
 }

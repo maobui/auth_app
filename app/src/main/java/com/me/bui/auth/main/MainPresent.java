@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.me.bui.auth.R;
 import com.me.bui.auth.auth.signup.SignupActivity;
 import com.me.bui.auth.base.BasePresent;
 
@@ -49,11 +50,11 @@ public class MainPresent extends BasePresent<IMainView>{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(mV.getContext(), "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
+                                mV.showSuccessEmailUpdated();
                                 signOut();
                                 mV.hideLoading();
                             } else {
-                                Toast.makeText(mV.getContext(), "Failed to update email!", Toast.LENGTH_LONG).show();
+                                mV.showErrorEmailUpdate();
                                 mV.hideLoading();
                             }
                         }
@@ -76,11 +77,11 @@ public class MainPresent extends BasePresent<IMainView>{
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(mV.getContext(), "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
+                                    mV.showSuccessPasswordSent();
                                     signOut();
                                     mV.hideLoading();
                                 } else {
-                                    Toast.makeText(mV.getContext(), "Failed to update password!", Toast.LENGTH_SHORT).show();
+                                    mV.showErrorPasswordSend();
                                     mV.hideLoading();
                                 }
                             }
@@ -100,10 +101,10 @@ public class MainPresent extends BasePresent<IMainView>{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(mV.getContext(), "Reset password email is sent!", Toast.LENGTH_SHORT).show();
+                                mV.showSuccessPasswordSent();
                                 mV.hideLoading();
                             } else {
-                                Toast.makeText(mV.getContext(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                mV.showErrorPasswordSend();
                                 mV.hideLoading();
                             }
                         }
@@ -121,11 +122,11 @@ public class MainPresent extends BasePresent<IMainView>{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(mV.getContext(), "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                mV.showSuccessDeleteUser();
                                 mV.startActivityAndFinish(SignupActivity.class);
                                 mV.hideLoading();
                             } else {
-                                Toast.makeText(mV.getContext(), "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                mV.showErrorDeleteUserFail();
                                 mV.hideLoading();
                             }
                         }

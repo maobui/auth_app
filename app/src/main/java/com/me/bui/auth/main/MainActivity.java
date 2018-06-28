@@ -1,11 +1,15 @@
 package com.me.bui.auth.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.me.bui.auth.R;
 import com.me.bui.auth.auth.login.LoginActivity;
@@ -20,6 +24,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private ProgressBar progressBar;
 
     private MainPresent mPresent;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         mPresent.checkSession();
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         btnChangeEmail = (Button) findViewById(R.id.change_email_button);
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
         btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
@@ -185,6 +191,69 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void hideLoading() {
 //        super.hideLoading();
         progressBar.setVisibility(View.GONE);
+    }
+
+    private void showSnackbar(String error, int color) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        TextView tvLabel = sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tvLabel.setTextColor(color);
+        snackbar.show();
+    }
+
+    @Override
+    public void showError(String error) {
+        this.showSnackbar(error, Color.RED);
+    }
+
+    @Override
+    public void showWarning(String warning) {
+        this.showSnackbar(warning, Color.YELLOW);
+    }
+
+    @Override
+    public void showSuccess(String success) {
+        this.showSnackbar(success, Color.GREEN);
+    }
+
+    @Override
+    public void showSuccessEmailUpdated() {
+        showSuccess(getString(R.string.email_updated));
+    }
+
+    @Override
+    public void showErrorEmailUpdate() {
+        showError(getString(R.string.email_update_failed));
+    }
+
+    @Override
+    public void showSuccessPasswordUpdated() {
+        showSuccess(getString(R.string.password_updated));
+    }
+
+    @Override
+    public void showErrorPasswordUpdate() {
+        showError(getString(R.string.password_update_failed));
+    }
+
+    @Override
+    public void showSuccessPasswordSent() {
+        showSuccess(getString(R.string.reset_pass_sent));
+    }
+
+    @Override
+    public void showErrorPasswordSend() {
+        showError(getString(R.string.reset_pass_failed));
+    }
+
+    @Override
+    public void showSuccessDeleteUser() {
+        showSuccess(getString(R.string.delete_user_successful));
+    }
+
+    @Override
+    public void showErrorDeleteUserFail() {
+        showError(getString(R.string.delete_user_failed));
     }
 
     @Override

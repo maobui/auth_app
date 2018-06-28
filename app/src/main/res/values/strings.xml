@@ -34,4 +34,14 @@
     <string name="enter_email_id">Enter your registered email id</string>
     <string name="sent_reset_password">We have sent you instructions to reset your password!</string>
     <string name="fail_send_reset_password">Failed to send reset email!</string>
+    <string name="auth_failed_reason">Authentication failed.</string>
+    <string name="created_user_successful">Created new user successful !</string>
+    <string name="email_updated">Email address is updated. Please sign in with new email id!</string>
+    <string name="email_update_failed">Failed to update email!</string>
+    <string name="password_updated">Password is updated, sign in with new password!</string>
+    <string name="password_update_failed">Failed to update password!</string>
+    <string name="reset_pass_sent">Reset password email is sent!</string>
+    <string name="reset_pass_failed">Failed to send reset email!</string>
+    <string name="delete_user_successful">Your profile is deleted:( Create a account now!</string>
+    <string name="delete_user_failed">Failed to delete your account!</string>
 </resources>

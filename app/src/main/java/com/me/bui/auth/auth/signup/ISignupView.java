@@ -9,4 +9,9 @@ import com.me.bui.auth.base.IBaseView;
  */
 public interface ISignupView  extends IBaseView {
     Activity getActivityClass();
+    void showWarningEmail();
+    void showWarningPassword();
+    void showWarningPasswordMin();
+    void showErrorCreateFailed();
+    void showSuccessCreated();
 }
