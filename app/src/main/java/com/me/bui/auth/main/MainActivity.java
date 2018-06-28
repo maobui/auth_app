@@ -267,8 +267,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     @Override
-    public void setOldEmailError(CharSequence error) {
-        oldEmail.setError(error);
+    public void setOldEmailError() {
+        oldEmail.setError(getString(R.string.enter_email));
     }
 
     @Override
@@ -277,8 +277,13 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     @Override
-    public void setPasswordError(CharSequence error) {
-        newPassword.setError(error);
+    public void setPasswordError() {
+        newPassword.setError(getString(R.string.minimum_password));
+    }
+
+    @Override
+    public void setPasswordErrorNull() {
+        newPassword.setError(getString(R.string.enter_password));
     }
 
     @Override
@@ -287,8 +292,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     @Override
-    public void setNewEmailError(CharSequence error) {
-        newEmail.setError(error);
+    public void setNewEmailError() {
+        newEmail.setError(getString(R.string.enter_email));
     }
 
 

@@ -8,11 +8,12 @@ import com.me.bui.auth.base.IBaseView;
 public interface IMainView extends IBaseView{
     void startLogin();
     String getOldEmail();
-    void setOldEmailError(CharSequence error);
+    void setOldEmailError();
     String getNewPassword();
-    void setPasswordError(CharSequence error);
+    void setPasswordError();
+    void setPasswordErrorNull();
     String getNewEmail();
-    void setNewEmailError(CharSequence error);
+    void setNewEmailError();
 
     void showSuccessEmailUpdated();
     void showErrorEmailUpdate();

@@ -60,7 +60,7 @@ public class MainPresent extends BasePresent<IMainView>{
                         }
                     });
         } else if (mV.getNewEmail().equals("")) {
-            mV.setNewEmailError("Enter email");
+            mV.setNewEmailError();
             mV.hideLoading();
         }
     }
@@ -69,7 +69,7 @@ public class MainPresent extends BasePresent<IMainView>{
         mV.showLoading();
         if (getCurrentUser() != null && !mV.getNewPassword().equals("")) {
             if (mV.getNewPassword().length() < 6) {
-                mV.setPasswordError("Password too short, enter minimum 6 characters");
+                mV.setPasswordError();
                 mV.hideLoading();
             } else {
                 getCurrentUser().updatePassword(mV.getNewPassword())
@@ -77,18 +77,18 @@ public class MainPresent extends BasePresent<IMainView>{
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    mV.showSuccessPasswordSent();
+                                    mV.showSuccessPasswordUpdated();
                                     signOut();
                                     mV.hideLoading();
                                 } else {
-                                    mV.showErrorPasswordSend();
+                                    mV.showErrorPasswordUpdate();
                                     mV.hideLoading();
                                 }
                             }
                         });
             }
         } else if (mV.getNewPassword().equals("")) {
-            mV.setPasswordError("Enter password");
+            mV.setPasswordErrorNull();
             mV.hideLoading();
         }
     }
@@ -110,7 +110,7 @@ public class MainPresent extends BasePresent<IMainView>{
                         }
                     });
         } else {
-            mV.setOldEmailError("Enter email");
+            mV.setOldEmailError();
             mV.hideLoading();
         }
     }
