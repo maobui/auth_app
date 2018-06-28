@@ -15,46 +15,77 @@ import com.me.bui.auth.R;
 import com.me.bui.auth.auth.login.LoginActivity;
 import com.me.bui.auth.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends BaseActivity implements IMainView {
 
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, signOut;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
-    private EditText oldEmail, newEmail, password, newPassword;
-    private ProgressBar progressBar;
+    @BindView(R.id.change_email_button)
+    Button btnChangeEmail;
+
+    @BindView(R.id.change_password_button)
+    Button btnChangePassword;
+
+    @BindView(R.id.sending_pass_reset_button)
+    Button btnSendResetEmail;
+
+    @BindView(R.id.remove_user_button)
+    Button btnRemoveUser;
+
+    @BindView(R.id.changeEmail)
+    Button changeEmail;
+
+    @BindView(R.id.changePass)
+    Button changePassword;
+
+    @BindView(R.id.send)
+    Button sendEmail;
+
+    @BindView(R.id.remove)
+    Button remove;
+
+    @BindView(R.id.sign_out)
+    Button signOut;
+
+    @BindView(R.id.old_email)
+    EditText oldEmail;
+
+    @BindView(R.id.new_email)
+    EditText newEmail;
+
+    @BindView(R.id.password)
+    EditText password;
+
+    @BindView(R.id.newPassword)
+    EditText newPassword;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private MainPresent mPresent;
-    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setUnbinder(ButterKnife.bind(this));
+
         mPresent = new MainPresent();
         mPresent.attachView(this);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
-
         mPresent.checkSession();
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        btnChangeEmail = (Button) findViewById(R.id.change_email_button);
-        btnChangePassword = (Button) findViewById(R.id.change_password_button);
-        btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-        changeEmail = (Button) findViewById(R.id.changeEmail);
-        changePassword = (Button) findViewById(R.id.changePass);
-        sendEmail = (Button) findViewById(R.id.send);
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
+        setUp();
+    }
 
-        oldEmail = (EditText) findViewById(R.id.old_email);
-        newEmail = (EditText) findViewById(R.id.new_email);
-        password = (EditText) findViewById(R.id.password);
-        newPassword = (EditText) findViewById(R.id.newPassword);
+    @Override
+    public void setUp() {
+        toolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(toolbar);
 
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
@@ -65,89 +96,72 @@ public class MainActivity extends BaseActivity implements IMainView {
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
 
-        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
-                newEmail.setVisibility(View.VISIBLE);
-                password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.GONE);
-                changeEmail.setVisibility(View.VISIBLE);
-                changePassword.setVisibility(View.GONE);
-                sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
-            }
-        });
+    }
 
-        changeEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresent.changeEmail();
-            }
-        });
+    @OnClick(R.id.change_email_button)
+    void onChangeEmailButtonClick() {
+        oldEmail.setVisibility(View.GONE);
+        newEmail.setVisibility(View.VISIBLE);
+        password.setVisibility(View.GONE);
+        newPassword.setVisibility(View.GONE);
+        changeEmail.setVisibility(View.VISIBLE);
+        changePassword.setVisibility(View.GONE);
+        sendEmail.setVisibility(View.GONE);
+        remove.setVisibility(View.GONE);
+    }
 
-        btnChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
-                newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.VISIBLE);
-                changeEmail.setVisibility(View.GONE);
-                changePassword.setVisibility(View.VISIBLE);
-                sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
-            }
-        });
+    @OnClick(R.id.changeEmail)
+    void onChangeEmail() {
+        mPresent.changeEmail();
+    }
 
-        changePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresent.changePassword();
-            }
-        });
 
-        btnSendResetEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oldEmail.setVisibility(View.VISIBLE);
-                newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.GONE);
-                changeEmail.setVisibility(View.GONE);
-                changePassword.setVisibility(View.GONE);
-                sendEmail.setVisibility(View.VISIBLE);
-                remove.setVisibility(View.GONE);
-            }
-        });
+    @OnClick(R.id.change_password_button)
+    void onChangePasswordButtonClick() {
+        oldEmail.setVisibility(View.GONE);
+        newEmail.setVisibility(View.GONE);
+        password.setVisibility(View.GONE);
+        newPassword.setVisibility(View.VISIBLE);
+        changeEmail.setVisibility(View.GONE);
+        changePassword.setVisibility(View.VISIBLE);
+        sendEmail.setVisibility(View.GONE);
+        remove.setVisibility(View.GONE);
+    }
 
-        sendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresent.sendEmail();
-            }
-        });
+    @OnClick(R.id.changePass)
+    void onChangePassword() {
+        mPresent.changePassword();
+    }
 
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresent.removeUser();
-            }
-        });
+    @OnClick(R.id.sending_pass_reset_button)
+    void onResetPasswordButtonClick() {
+        oldEmail.setVisibility(View.VISIBLE);
+        newEmail.setVisibility(View.GONE);
+        password.setVisibility(View.GONE);
+        newPassword.setVisibility(View.GONE);
+        changeEmail.setVisibility(View.GONE);
+        changePassword.setVisibility(View.GONE);
+        sendEmail.setVisibility(View.VISIBLE);
+        remove.setVisibility(View.GONE);
+    }
 
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
+    @OnClick(R.id.send)
+    void onResetPassword() {
+        mPresent.sendEmail();
+    }
 
+    @OnClick(R.id.remove_user_button)
+    void onRemoveUserButtonClick() {
+        mPresent.removeUser();
+    }
+
+    @OnClick(R.id.sign_out)
+    void onSignOutButtonClick() {
+        signOut();
     }
 
     //sign out method

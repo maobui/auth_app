@@ -20,45 +20,47 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.me.bui.auth.R;
 import com.me.bui.auth.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ResetPasswordActivity extends BaseActivity implements IResetPasswordView {
 
-    private CoordinatorLayout coordinatorLayout;
-    private EditText inputEmail;
-    private Button btnReset, btnBack;
-    private ProgressBar progressBar;
+    @BindView(R.id.email)
+    EditText inputEmail;
 
-    ResetPasswordPresent mPresent;
+    @BindView(R.id.btn_reset_password)
+    Button btnReset;
+
+    @BindView(R.id.btn_back)
+    Button btnBack;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    private ResetPasswordPresent mPresent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        inputEmail = (EditText) findViewById(R.id.email);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
-        btnBack = (Button) findViewById(R.id.btn_back);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        setUnbinder(ButterKnife.bind(this));
 
         mPresent = new ResetPasswordPresent();
         mPresent.attachView(this);
+    }
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @OnClick(R.id.btn_reset_password)
+    void onResetPassword() {
+        String email = inputEmail.getText().toString().trim();
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mPresent.reset(email);
+    }
 
-                String email = inputEmail.getText().toString().trim();
-
-                mPresent.reset(email);
-            }
-        });
+    @OnClick(R.id.btn_back)
+    void onBack() {
+        finish();
     }
 
     @Override

@@ -9,10 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.Unbinder;
+
 /**
  * Created by mao.bui on 6/27/2018.
  */
 public class BaseActivity extends AppCompatActivity implements IBaseView {
+
+    private Unbinder mUnbinder;
+
+    @Override
+    public void setUp() {
+
+    }
 
     @Override
     public void startActivity(Class<? extends Activity> clazz) {
@@ -57,5 +66,17 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     @Override
     public void showSuccess(String success) {
         this.showSnackbar(success, Color.GREEN);
+    }
+
+    public void setUnbinder(Unbinder unbinder) {
+        mUnbinder = unbinder;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        super.onDestroy();
     }
 }

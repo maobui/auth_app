@@ -17,13 +17,30 @@ import com.me.bui.auth.auth.reset.ResetPasswordActivity;
 import com.me.bui.auth.auth.signup.SignupActivity;
 import com.me.bui.auth.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class LoginActivity extends BaseActivity implements ILoginView {
 
-    private CoordinatorLayout coordinatorLayout;
-    private EditText inputEmail, inputPassword;
+    @BindView(R.id.email)
+    EditText inputEmail;
 
-    private ProgressBar progressBar;
-    private Button btnSignup, btnLogin, btnReset;
+    @BindView(R.id.password)
+    EditText inputPassword;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.btn_signup)
+    Button btnSignup;
+
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+
+    @BindView(R.id.btn_reset_password)
+    Button btnReset;
+
 
     LoginPresent mPresent;
 
@@ -31,50 +48,33 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPresent = new LoginPresent();
-        mPresent.attachView(this);
-
-        mPresent.checkSession();
-
         // set the view now
         setContentView(R.layout.activity_login);
 
+        setUnbinder(ButterKnife.bind(this));
+
+        mPresent = new LoginPresent();
+        mPresent.attachView(this);
+        mPresent.checkSession();
+    }
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @OnClick(R.id.btn_signup)
+    void onSignUp() {
+        startActivity(SignupActivity.class);
+    }
 
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
+    @OnClick(R.id.btn_login)
+    void onLogin() {
+        String email = inputEmail.getText().toString();
+        final String password = inputPassword.getText().toString();
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(SignupActivity.class);
-            }
-        });
+        mPresent.login(email, password);
+    }
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ResetPasswordActivity.class);
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = inputEmail.getText().toString();
-                final String password = inputPassword.getText().toString();
-
-                mPresent.login(email, password);
-            }
-        });
+    @OnClick(R.id.btn_reset_password)
+    void onResetPassword() {
+        startActivity(ResetPasswordActivity.class);
     }
 
     @Override
