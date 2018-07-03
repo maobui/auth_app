@@ -16,6 +16,15 @@ import com.me.bui.auth.realdb.model.User;
  * Created by mao.bui on 6/28/2018.
  */
 public class RealtimeDatabasePresent extends BasePresent<IRealtimeDatabaseView> {
+    private final static String TAG = RealtimeDatabasePresent.class.getSimpleName();
+
+    private final static String USERS = "users";
+    private final static String APP_TITLE = "app_title";
+    private final static String APP_TITLE_VALUE = "Realtime Database";
+    public static final class UserEntry {
+        public static final  String NAME = "name";
+        public static final  String EMAIL = "email";
+    }
 
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mFirebaseDatabase;
@@ -26,15 +35,15 @@ public class RealtimeDatabasePresent extends BasePresent<IRealtimeDatabaseView> 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         // get reference to 'users' node
-        mDatabaseReference = mFirebaseDatabase.getReference("users");
+        mDatabaseReference = mFirebaseDatabase.getReference(USERS);
 
         // store app title to 'app_title' node
-        mFirebaseDatabase.getReference("app_title").setValue("Realtime Database");
+        mFirebaseDatabase.getReference(APP_TITLE).setValue(APP_TITLE_VALUE);
     }
 
     public void registerDatabaseListener() {
         // app_title change listener
-        mFirebaseDatabase.getReference("app_title").addValueEventListener(new ValueEventListener() {
+        mFirebaseDatabase.getReference(APP_TITLE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                Log.e(TAG, "App title updated");
@@ -76,7 +85,7 @@ public class RealtimeDatabasePresent extends BasePresent<IRealtimeDatabaseView> 
                 User user = dataSnapshot.getValue(User.class);
 
                 // Check for null
-                if (user == null) {
+                if (user == null ) {
                     mV.showWarning(R.string.warn_user_data);
                     return;
                 }
@@ -94,10 +103,10 @@ public class RealtimeDatabasePresent extends BasePresent<IRealtimeDatabaseView> 
     public void updateUser(String name, String email) {
         // updating the user via child nodes
         if (!TextUtils.isEmpty(name))
-            mDatabaseReference.child(userId).child("name").setValue(name);
+            mDatabaseReference.child(userId).child(UserEntry.NAME).setValue(name);
 
         if (!TextUtils.isEmpty(email))
-            mDatabaseReference.child(userId).child("email").setValue(email);
+            mDatabaseReference.child(userId).child(UserEntry.EMAIL).setValue(email);
     }
 
     public String getUserId() {
